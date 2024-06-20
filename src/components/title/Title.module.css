@@ -1,8 +1,10 @@
+/* Title.module.css */
 .title {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;  
+    justify-content: center; /* Adjusts content distribution */
+    align-items: center; /* Vertically centers the items */
+    height: 100%;
     width: 100%;
     color: white;
+    padding: 0 20px; /* Adds horizontal padding */
 }

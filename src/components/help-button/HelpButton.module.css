@@ -1,0 +1,13 @@
+.helpBtn {
+    background-color: skyblue;
+    display: flex;
+    margin-left: auto;
+    margin-right: 25px;
+    margin-top: 25px;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 15px 30px;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
