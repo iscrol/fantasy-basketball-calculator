@@ -2,6 +2,7 @@ import './App.css';
 import Title from "./components/title/Title";
 import HelpButton from './components/help-button/HelpButton';
 import StatisticalButtons from './components/statistical-buttons/StatisticalButtons';
+import PlayerTable from './components/player-table/PlayerTable';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <HelpButton/>
       <Title/>
       <StatisticalButtons/>
+      <PlayerTable/>
     </div>
   )
 }

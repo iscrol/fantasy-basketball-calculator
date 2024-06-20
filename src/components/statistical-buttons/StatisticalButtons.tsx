@@ -26,7 +26,7 @@ const StatisticalButtons = () => {
                     key={category}
                     onClick={() => handleClick(category)}
                     className={styles.statBtn}
-                    style={{ backgroundColor: buttonStates[category] ? 'skyblue' : 'gray' }}
+                    style={{ backgroundColor: buttonStates[category] ? 'teal' : 'gray' }}
                 >
                     {category}
                 </button>

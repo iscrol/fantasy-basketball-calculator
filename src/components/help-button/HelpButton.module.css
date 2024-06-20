@@ -1,6 +1,8 @@
 .helpBtn {
-    background-color: skyblue;
+    background-color: teal;
     display: flex;
+    align-items: center;
+    justify-content: center;
     margin-left: auto;
     margin-right: 25px;
     margin-top: 25px;
@@ -12,7 +14,9 @@
     font-size: 1.2rem;
     width: 100px;
     height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.helpBtn:hover {
+    background-color: #006666; /* Darker blue on hover */
 }
