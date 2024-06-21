@@ -1,22 +1,25 @@
-.helpBtn {
-    background-color: teal;
+.header {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: 25px;
-    margin-top: 25px;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+.logo {
+    height: 50px; 
+}
+
+.helpBtn {
+    background-color: #61dafb;
     color: white;
     border: none;
-    border-radius: 15px;
-    padding: 10px 25px;
+    border-radius: 5px;
+    padding: 10px 20px;
     cursor: pointer;
     font-size: 1.2rem;
-    width: 100px;
-    height: 50px;
-    transition: background-color 0.3s ease; /* Smooth transition */
+    transition: background-color 0.3s ease;
 }
 
 .helpBtn:hover {
-    background-color: #006666; /* Darker blue on hover */
+    background-color: #21a1f1;
 }

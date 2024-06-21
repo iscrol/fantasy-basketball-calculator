@@ -7,7 +7,9 @@ import PlayerTable from './components/player-table/PlayerTable';
 function App() {
   return (
     <div>
-      <HelpButton/>
+      <header>
+        <HelpButton/>
+      </header>
       <Title/>
       <StatisticalButtons/>
       <PlayerTable/>
