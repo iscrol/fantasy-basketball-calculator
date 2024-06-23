@@ -22,3 +22,21 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Virtual Environment
+venv/
+env/
+
+# Database
+*.db
+
+# Bytecode
+__pycache__/
+*.pyc
+
+# OS generated files
+.DS_Store  # For macOS
+Thumbs.db  # For Windows
+
+# IDE-specific files
+.vscode/  # If using Visual Studio Code
