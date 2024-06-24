@@ -1,4 +1,4 @@
-from app import db
+from database import db 
 
 class Player(db.Model):
     id = db.Column(db.Integer, primary_key=True)
