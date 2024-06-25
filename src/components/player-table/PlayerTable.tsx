@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './PlayerTable.module.css';
 
 interface Player {
@@ -20,13 +20,23 @@ interface Player {
 }
 
 const PlayerTable: React.FC = () => {
-    // Dummy data for players
-    const players: Player[] = [
-        { name: 'Player 1', team: 'OKC', position: 'PG', value: 95, games: 30, minutes: 35, points: 25, rebounds: 10, assists: 5, steals: 2, blocks: 1, threePM: 3, fgPct: 0.45, ftPct: 0.85, turnovers: 2 },
-        { name: 'Player 2', team: 'LAC', position: 'SF', value: 90, games: 32, minutes: 33, points: 20, rebounds: 8, assists: 7, steals: 1, blocks: 0, threePM: 4, fgPct: 0.50, ftPct: 0.90, turnovers: 3 },
-        { name: 'Player 3', team: 'PHX', position: 'C',value: 85, games: 28, minutes: 36, points: 15, rebounds: 5, assists: 10, steals: 3, blocks: 1, threePM: 2, fgPct: 0.55, ftPct: 0.75, turnovers: 1 },
-        // Add more dummy players as needed
-    ];
+    const [players, setPlayers] = useState<Player[]>([]);
+
+    useEffect(() => {
+        const fetchPlayers = async () => {
+            try {
+                const response = await fetch ('http://127.0.0.1:5000/api/players');  // Update the URL to match your Flask API endpoint
+                const data: Player[] = await response.json();
+                setPlayers(data);
+                console.log(data);
+            } catch (error) {
+                console.error('Failed to fetch players:', error);
+            }
+        };
+
+        fetchPlayers();
+    }, []);
+    
 
     return (
         <div className={styles.tableContainer}>
@@ -54,7 +64,7 @@ const PlayerTable: React.FC = () => {
                 <tbody>
                     {players.map((player, index) => (
                         <tr key={index}>
-                            <td>{index + 1}</td> {/* Rank column */}
+                            <td>{index + 1}</td>
                             <td>{player.name}</td>
                             <td>{player.team}</td>
                             <td>{player.position}</td>
@@ -67,8 +77,8 @@ const PlayerTable: React.FC = () => {
                             <td>{player.steals}</td>
                             <td>{player.blocks}</td>
                             <td>{player.threePM}</td>
-                            <td>{(player.fgPct * 100).toFixed(1)}%</td>
-                            <td>{(player.ftPct * 100).toFixed(1)}%</td>
+                            <td>{player.fgPct}</td>
+                            <td>{player.ftPct}</td>
                             <td>{player.turnovers}</td>
                         </tr>
                     ))}

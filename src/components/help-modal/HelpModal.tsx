@@ -41,6 +41,16 @@ const HelpModal: React.FC<HelpModalProps> = ({ isOpen, onClose }) => {
                     I would click 3PM and FT% so they are grey'd out and then observe the 
                     new rankings that appear from it.
                 </p>
+                <p>
+                    In the dataset, you may notice that certain players are listed multiple times. 
+                    This occurs when a player has been traded to another team during the season. 
+                    The impact of such trades on a player's role and minutes can be significant, 
+                    making their performance metrics vary notably between teams. To provide a more 
+                    accurate reflection of a player's season, I have chosen to maintain separate 
+                    statistics for each team they played on. Combining these statistics into a single 
+                    row could obscure these variations and would not effectively convey the true 
+                    nature of the player's performance throughout the season.                
+                </p>
                 <button onClick={onClose} className={styles.closeButton}>Close</button>
             </div>
         </div>

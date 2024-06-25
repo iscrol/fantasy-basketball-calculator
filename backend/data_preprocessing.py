@@ -13,9 +13,8 @@ def load_data():
     for col in ['PTS', 'TRB', 'AST', 'STL', 'BLK', 'FT%', 'FG%', '3P', 'TOV']:
         df[f'z_{col.lower()}'] = zscore(df[col])
 
-    # Combine and deduplicate data as before
-    player_counts = df['Player'].value_counts()
-    df = df.drop_duplicates(subset=['Player', 'Tm'], keep='last')
+    # remove tot stats for players who were traded
+    df = df[df['Tm'] != 'TOT']  
 
     # Load cleaned data into the database
     with app.app_context():
@@ -52,4 +51,5 @@ def load_data():
 
 if __name__ == '__main__':
     load_data()
+    
 
