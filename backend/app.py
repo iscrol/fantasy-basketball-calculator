@@ -1,10 +1,9 @@
 from flask import Flask, request, jsonify
-from database import db  
+from database import db
 import click
 from flask.cli import with_appcontext
 from flask_cors import CORS
 from models import Player
-
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
@@ -16,15 +15,32 @@ db.init_app(app)
 
 @app.route('/api/players', methods=['GET'])
 def get_players():
-    players = Player.query.all()  # Fetch all player entries from the database
+    active_stats = request.args.getlist('stats')  # Example: ['points', 'rebounds', 'assists']
+    players = Player.query.all()
 
-    #calculate total value
+    # Calculate total value based on active stats
     for player in players:
-        player.value = round(
-            player.z_points + player.z_rebounds + player.z_assists + 
-            player.z_steals + player.z_blocks - player.z_turnovers + # subtract turnovers because it's a negative stat
-            player.z_ft_percentage + player.z_fg_percentage + player.z_threes_made, 2
-        )
+        total_value = 0
+        if 'PTS' in active_stats:
+            total_value += player.z_points
+        if 'REB' in active_stats:
+            total_value += player.z_rebounds
+        if 'AST' in active_stats:
+            total_value += player.z_assists
+        if 'STL' in active_stats:
+            total_value += player.z_steals
+        if 'BLK' in active_stats:
+            total_value += player.z_blocks
+        if '3PM' in active_stats:
+            total_value += player.z_threes_made
+        if 'FG%' in active_stats:
+            total_value += player.z_fg_percentage
+        if 'FT%' in active_stats:
+            total_value += player.z_ft_percentage
+        if 'TO' in active_stats:
+            total_value -= player.z_turnovers  # Subtract because it's a negative stat
+
+        player.value = round(total_value, 2)
 
     sorted_players = sorted(players, key=lambda x: x.value, reverse=True)
 
@@ -46,14 +62,13 @@ def get_players():
             'ftPct': player.ft_percentage,
             'turnovers': player.turnovers,
             'value': player.value
-
         } for player in sorted_players
     ]
     return jsonify(players_data)
 
 @app.route('/')
 def home():
-    return 'Hello, Fantasy Basketball Calculator!'
+    return 'Fantasy Basketball Calculator!'
 
 @app.cli.command("load-data")
 @with_appcontext

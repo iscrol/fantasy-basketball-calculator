@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styles from './PlayerTable.module.css';
 
 interface Player {
@@ -19,25 +19,11 @@ interface Player {
     turnovers: number;
 }
 
-const PlayerTable: React.FC = () => {
-    const [players, setPlayers] = useState<Player[]>([]);
+interface PlayerTableProps {
+    players: Player[];
+}
 
-    useEffect(() => {
-        const fetchPlayers = async () => {
-            try {
-                const response = await fetch ('http://127.0.0.1:5000/api/players');  // Update the URL to match your Flask API endpoint
-                const data: Player[] = await response.json();
-                setPlayers(data);
-                console.log(data);
-            } catch (error) {
-                console.error('Failed to fetch players:', error);
-            }
-        };
-
-        fetchPlayers();
-    }, []);
-    
-
+const PlayerTable: React.FC<PlayerTableProps> = ({ players }) => {
     return (
         <div className={styles.tableContainer}>
             <table className={styles.table}>
