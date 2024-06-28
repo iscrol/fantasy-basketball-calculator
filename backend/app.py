@@ -4,11 +4,21 @@ import click
 from flask.cli import with_appcontext
 from flask_cors import CORS
 from models import Player
+from dotenv import load_dotenv
+import os
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+dotenv_path = os.path.join(os.path.dirname(__file__), '..', '.env')
+
+# Load the environment variables from the specified .env file
+load_dotenv(dotenv_path)
+
+# Now you can use os.getenv to get the environment variables
+database_url = os.getenv('DATABASE_URL')
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)

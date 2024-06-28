@@ -40,3 +40,5 @@ Thumbs.db  # For Windows
 
 # IDE-specific files
 .vscode/  # If using Visual Studio Code
+
+.env
