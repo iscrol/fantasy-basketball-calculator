@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from database import db
 import click
 from flask.cli import with_appcontext
@@ -7,7 +7,7 @@ from models import Player
 from dotenv import load_dotenv
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../build', static_url_path='')
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 dotenv_path = os.path.join(os.path.dirname(__file__), '..', '.env')
@@ -77,8 +77,8 @@ def get_players():
     return jsonify(players_data)
 
 @app.route('/')
-def home():
-    return 'Fantasy Basketball Calculator!'
+def serve():
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.cli.command("load-data")
 @with_appcontext
