@@ -1,3 +1,6 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from flask import Flask, request, jsonify, send_from_directory
 from database import db
 import click
@@ -5,7 +8,7 @@ from flask.cli import with_appcontext
 from flask_cors import CORS
 from models import Player
 from dotenv import load_dotenv
-import os
+
 
 app = Flask(__name__, static_folder='../build', static_url_path='')
 CORS(app, resources={r"/api/*": {"origins": "*"}})
