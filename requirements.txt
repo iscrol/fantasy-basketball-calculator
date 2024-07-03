@@ -64,7 +64,7 @@ notebook_shim==0.2.2
 numpy==1.24.4
 outcome==1.2.0
 packaging==22.0
-pandas==2.1.2
+pandas==2.0.3
 pandocfilters==1.5.0
 parso==0.8.3
 pexpect==4.8.0
